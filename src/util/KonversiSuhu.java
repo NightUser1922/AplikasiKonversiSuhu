@@ -1,3 +1,5 @@
+package util;
+
 public class KonversiSuhu {
     public static double keCelsius(double nilai, String asal) {
         switch (asal) {
