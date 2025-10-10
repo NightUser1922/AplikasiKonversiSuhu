@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import util.SurprisePanel;
@@ -283,7 +284,9 @@ public class FrmKonversiSuhu extends javax.swing.JFrame {
         evt.consume();
     }
     }//GEN-LAST:event_txtInputKeyTyped
-
+        private void txtInputActionPerformed(java.awt.event.ActionEvent evt){
+            txtInputActionPerformed(null);
+        }
     private void txtHasilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHasilKeyReleased
         btnKonversiActionPerformed(null);        // TODO add your handling code here:
     }//GEN-LAST:event_txtHasilKeyReleased
