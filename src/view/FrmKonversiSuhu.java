@@ -91,12 +91,20 @@ public class FrmKonversiSuhu extends javax.swing.JFrame {
         rbK.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         rbK.setText("K");
 
+        txtInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtInputMouseClicked(evt);
+            }
+        });
         txtInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInputActionPerformed(evt);
             }
         });
         txtInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtInputKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtInputKeyTyped(evt);
             }
@@ -340,7 +348,7 @@ public class FrmKonversiSuhu extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_txtInputKeyTyped
         private void txtInputActionPerformed(java.awt.event.ActionEvent evt){
-            txtInputActionPerformed(null);
+    btnKonversiActionPerformed(evt);
         }
     private void txtHasilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHasilKeyReleased
         btnKonversiActionPerformed(null);        // TODO add your handling code here:
@@ -417,6 +425,17 @@ public class FrmKonversiSuhu extends javax.swing.JFrame {
     private void rbCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbCActionPerformed
+
+    private void txtInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMouseClicked
+            txtInput.setText("");
+    }//GEN-LAST:event_txtInputMouseClicked
+
+    private void txtInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyReleased
+    if (txtInput.getText().trim().isEmpty()) {
+        txtHasil.setText("");
+    }
+
+    }//GEN-LAST:event_txtInputKeyReleased
 
     /**
      * @param args the command line arguments
