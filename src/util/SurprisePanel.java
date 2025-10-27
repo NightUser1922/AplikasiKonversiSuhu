@@ -4,48 +4,75 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 import javax.swing.Timer;
-// import java.applet.AudioClip; // Uncomment jika ingin tambah sound
 
 public class SurprisePanel extends JPanel {
     private final String[] pesan = {
-        "🚨 WOOW-WOOW! Semangat konversi! 🚨",
-        "🔥 SIRENE BERBUNYI! Kamu panas! 🔥",
-        "❄️ DINGIN! Tapi jangan diam! ❄️",
+        "🚨 WOOK - WOOK ! TOT - TOT ! 🚨",
+        "🔥 DEMI KEMULIAAN ! 🔥", 
+        "❄ DINGIN! Tetapi Tidak Kejam! ❄",
         "⚡ HATI-HATI! Kecerdasan meledak! ⚡",
-        "🎯 TARGET TERCAPAI! Excellent! 🎯"
+        "🎯 TARGET TERCAPAI! Excellent! 🎯",
+        ".--. . -- .-. --- --. .-. .- -- .- -. / -... . .-. -... .- ... .. ... / --- -... .--- . -.- / ..---"
     };
     
     private final Random rand = new Random();
     private String teks;
     private Timer stroboTimer;
-    private boolean isRedPhase = true;
     private int flashCount = 0;
-    private final int TOTAL_FLASHES = 15; // Sekitar 3 detik dengan interval 200ms
+    private final int TOTAL_FLASHES = 160;
 
-    // Warna strobo
     private final Color POLICE_RED = new Color(255, 0, 0);
     private final Color POLICE_BLUE = new Color(30, 30, 255);
     private final Color DARK_BLUE = new Color(0, 0, 80);
 
     public SurprisePanel() {
-        this.teks = pesan[rand.nextInt(pesan.length)];
-        setPreferredSize(new Dimension(700, 600));
+        this.teks = "Tunggu data suhu...";
+        setPreferredSize(new Dimension(1500, 600));
         setBackground(Color.BLACK);
+    }
+
+    // Method untuk mengatur suhu dan menampilkan pesan yang sesuai
+    public void setSuhu(double suhuCelcius) {
+        if (suhuCelcius <= -50) {
+            this.teks = "❄ SUHU NOL ABSOLUT! Hampir Mustahil! ❄";
+        } else if (suhuCelcius <= -20) {
+            this.teks = "❄ MEMBEKULAH! Hindari es batu! ❄";
+        } else if (suhuCelcius <= 0) {
+            this.teks = "❄ BRRR BRRR, DINGIN! Tetapi Tidak Kejam! ❄";
+        } else if (suhuCelcius <= 10) {
+            this.teks = "🌡 SUHU SEDANG! Mari lanjutkan! 🌡";
+        } else if (suhuCelcius <= 25) {
+            this.teks = "🌡 SUHU NORMAL! Mari lanjutkan! DEMI KEMULIAAN ! 🌡";
+        } else if (suhuCelcius <= 35) {
+            this.teks = "🔥 HANGAT! Stay cool! 🔥";
+        } else if (suhuCelcius <= 50) {
+            this.teks = "🚨 TOT - TOT WUK - WUK, PANAS! Awas overheating! 🚨";
+        } else if (suhuCelcius <= 100) {
+            this.teks = "💀 SUHU EKSTRIM! Evakuasi segera! 💀";
+        } else {
+            this.teks = "💀 I, AM, ATOMIC! SUHU TAK TERBENDUNG! 💀";
+        }
         
+        // Mulai efek strobo setiap kali suhu diupdate
         startPoliceStrobo();
     }
 
     private void startPoliceStrobo() {
-        // Efek strobo dengan pola yang lebih dinamis
+        if (stroboTimer != null && stroboTimer.isRunning()) {
+            stroboTimer.stop();
+        }
+        
+        flashCount = 0;
         stroboTimer = new Timer(200, e -> {
             flashCount++;
             
             if (flashCount >= TOTAL_FLASHES) {
                 stroboTimer.stop();
+                setBackground(Color.BLACK);
+                repaint();
                 return;
             }
             
-            // Pola strobo: merah-biru-merah-hitam-biru-merah-dll
             switch (flashCount % 4) {
                 case 0:
                     setBackground(POLICE_RED);
@@ -72,7 +99,6 @@ public class SurprisePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         
-        // High quality rendering
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
@@ -81,9 +107,7 @@ public class SurprisePanel extends JPanel {
     }
     
     private void drawStroboEffects(Graphics2D g2d) {
-        // Efek flashing lights di sudut
         if (flashCount % 2 == 0) {
-            // Police light circles
             g2d.setColor(POLICE_RED);
             g2d.fillOval(20, 20, 40, 40);
             
@@ -97,7 +121,6 @@ public class SurprisePanel extends JPanel {
             g2d.fillOval(getWidth() - 60, getHeight() - 60, 40, 40);
         }
         
-        // Rotating light bars
         int barCount = 8;
         int barWidth = getWidth() / barCount;
         for (int i = 0; i < barCount; i++) {
@@ -109,28 +132,24 @@ public class SurprisePanel extends JPanel {
     }
     
     private void drawTextWithEffects(Graphics2D g2d) {
-        // Font untuk efek polisi
         Font policeFont = new Font("Arial Black", Font.BOLD, 24);
         g2d.setFont(policeFont);
         
-        // Warna text dengan efek glow
         Color textColor = getBackground().equals(POLICE_RED) ? Color.YELLOW : Color.WHITE;
         g2d.setColor(textColor);
         
-        // Shadow effect untuk readability
-        g2d.setColor(Color.BLACK);
         FontMetrics fm = g2d.getFontMetrics();
         int textWidth = fm.stringWidth(teks);
         int x = (getWidth() - textWidth) / 2 + 3;
         int y = getHeight() / 2 + 3;
+        
+        g2d.setColor(Color.BLACK);
         g2d.drawString(teks, x, y);
         
-        // Main text
         g2d.setColor(textColor);
         g2d.drawString(teks, x - 3, y - 3);
         
-        // Border effect selama strobo aktif
-        if (stroboTimer.isRunning()) {
+        if (stroboTimer != null && stroboTimer.isRunning()) {
             g2d.setColor(Color.WHITE);
             g2d.setStroke(new BasicStroke(3));
             g2d.drawRect(5, 5, getWidth() - 10, getHeight() - 10);
