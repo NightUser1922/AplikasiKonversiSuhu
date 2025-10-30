@@ -379,11 +379,11 @@ public class FrmKonversiSuhu extends javax.swing.JFrame {
     btnKonversiActionPerformed(evt);
         }
     private void txtHasilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHasilKeyReleased
-        btnKonversiActionPerformed(null);        // TODO add your handling code here:
+        btnKonversiActionPerformed(null);
     }//GEN-LAST:event_txtHasilKeyReleased
 
     private void cmbAsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAsalActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cmbAsalActionPerformed
 
     private void btnSurpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurpriseActionPerformed
