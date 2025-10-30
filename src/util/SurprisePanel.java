@@ -6,14 +6,6 @@ import java.util.Random;
 import javax.swing.Timer;
 
 public class SurprisePanel extends JPanel {
-    private final String[] pesan = {
-        "🚨 WOOK - WOOK ! TOT - TOT ! 🚨",
-        "🔥 DEMI KEMULIAAN ! 🔥", 
-        "❄ DINGIN! Tetapi Tidak Kejam! ❄",
-        "⚡ HATI-HATI! Kecerdasan meledak! ⚡",
-        "🎯 TARGET TERCAPAI! Excellent! 🎯",
-        ".--. . -- .-. --- --. .-. .- -- .- -. / -... . .-. -... .- ... .. ... / --- -... .--- . -.- / ..---"
-    };
     
     private final Random rand = new Random();
     private String teks;
@@ -24,6 +16,7 @@ public class SurprisePanel extends JPanel {
     private final Color POLICE_RED = new Color(255, 0, 0);
     private final Color POLICE_BLUE = new Color(30, 30, 255);
     private final Color DARK_BLUE = new Color(0, 0, 80);
+
 
     public SurprisePanel() {
         this.teks = "Tunggu data suhu...";
@@ -40,12 +33,12 @@ public class SurprisePanel extends JPanel {
         } else if (suhuCelcius <= 0) {
             this.teks = "❄ BRRR BRRR, DINGIN! Tetapi Tidak Kejam! ❄";
         } else if (suhuCelcius <= 10) {
-            this.teks = "🌡 SUHU SEDANG! Mari lanjutkan! 🌡";
+            this.teks = "🌡 SUHU MASIH RENDAH, HATI-HATI! Mari lanjutkan! 🌡";
         } else if (suhuCelcius <= 25) {
             this.teks = "🌡 SUHU NORMAL! Mari lanjutkan! DEMI KEMULIAAN ! 🌡";
         } else if (suhuCelcius <= 35) {
-            this.teks = "🔥 HANGAT! Stay cool! 🔥";
-        } else if (suhuCelcius <= 50) {
+            this.teks = "🔥 HANGAT! Stay cool! Menuju Tak Terbatas dan Melampauinya 🔥";
+        } else if (suhuCelcius <= 60) {
             this.teks = "🚨 TOT - TOT WUK - WUK, PANAS! Awas overheating! 🚨";
         } else if (suhuCelcius <= 100) {
             this.teks = "💀 SUHU EKSTRIM! Evakuasi segera! 💀";
@@ -68,7 +61,7 @@ public class SurprisePanel extends JPanel {
             
             if (flashCount >= TOTAL_FLASHES) {
                 stroboTimer.stop();
-                setBackground(Color.BLACK);
+                setBackground(Color.WHITE);
                 repaint();
                 return;
             }
@@ -84,7 +77,7 @@ public class SurprisePanel extends JPanel {
                     setBackground(POLICE_RED.brighter());
                     break;
                 case 3:
-                    setBackground(DARK_BLUE);
+                    setBackground(POLICE_BLUE);
                     break;
             }
             
